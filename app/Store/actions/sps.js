@@ -1,21 +1,25 @@
-import { SET_SPS, SPS_LOADING, ERROR_SPS } from "../../constants/ActionTypes";
-import { getReadySps } from "../api";
+import {
+  SET_USER_STATE,
+  USER_LOADING,
+  ERROR_USER,
+} from "../../constants/ActionTypes";
+import { setState } from "../api";
 
-export const getAvailableSps = () => (dispatch) => {
-  dispatch({ type: SPS_LOADING });
+export const setOnlineState = (id, state) => (dispatch) => {
+  dispatch({ type: USER_LOADING });
 
-  getReadySps()
+  setState(id, state)
     .then((res) => {
-      console.log("Get sps - got results : " + res.data.length);
+      // console.log("Set sp state - " + res.data);
       return dispatch({
-        type: SET_SPS,
+        type: SET_USER_STATE,
         data: res.data,
       });
     })
     .catch((err) => {
-      console.log("Get sps - got error : " + err.message);
+      console.log("Set sp state - got error : " + err.message);
       return dispatch({
-        type: ERROR_SPS,
+        type: ERROR_USER,
         data: err.message,
       });
     });

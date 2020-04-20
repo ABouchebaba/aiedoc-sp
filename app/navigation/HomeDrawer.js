@@ -3,6 +3,7 @@ import React from "react";
 import { CustomDrawerContent } from "../components";
 import About from "../screens/About";
 import History from "../screens/History";
+import Services from "../screens/Services";
 import Home from "../screens/Home";
 import ProfileStack from "./ProfileStack";
 import StoreStack from "./StoreStack";
@@ -20,6 +21,7 @@ function HomeDrawerScreen() {
       <HomeDrawer.Screen name="Accueil" component={Home} />
       <HomeDrawer.Screen name="Profile" component={ProfileStack} />
       <HomeDrawer.Screen name="Historique" component={History} />
+      <HomeDrawer.Screen name="Services" component={Services} />
       <HomeDrawer.Screen name="Boutique" component={StoreStack} />
       <HomeDrawer.Screen name="A propos" component={About} />
     </HomeDrawer.Navigator>

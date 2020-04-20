@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Aiedoc",
-    "slug": "Aiedoc",
+    "name": "Aiedoc-sp",
+    "slug": "Aiedoc-sp",
     "privacy": "public",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
@@ -18,17 +18,14 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aiedoc.aiedocTest",
+      "bundleIdentifier": "com.aiedoc.aiedocTestSp",
       "googleServicesFile": "./GoogleService-Info.plist",
       "infoPlist": {
-        "UIBackgroundModes": [
-          "location",
-          "fetch"
-        ]
+        "UIBackgroundModes": ["location", "fetch"]
       }
     },
     "android": {
-      "package": "com.aiedoc.aiedocTest",
+      "package": "com.aiedoc.aiedocTestSp",
       "googleServicesFile": "./google-services.json"
     },
     "description": ""

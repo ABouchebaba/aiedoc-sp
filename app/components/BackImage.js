@@ -11,7 +11,7 @@ export const BackImage = (props) => {
   );
 };
 
-const styles =StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     marginTop: StatusBar.currentHeight,
     flex: 1,
@@ -19,6 +19,6 @@ const styles =StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
+    // justifyContent: "center",
   },
 });

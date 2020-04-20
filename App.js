@@ -10,14 +10,13 @@ enableScreens(); // for performance optimization
 
 // to be put in env or some config file
 const firebaseConfig = {
-  apiKey: "AIzaSyCAopAg2T797E76O4baQ0Kmto_QDZ2whIA",
-  authDomain: "aiedoc-test.firebaseapp.com",
-  databaseURL: "https://aiedoc-test.firebaseio.com",
-  projectId: "aiedoc-test",
-  storageBucket: "aiedoc-test.appspot.com",
-  messagingSenderId: "1055588730579",
-  appId: "1:1055588730579:web:81ee78e07be0a9746ef626",
-  measurementId: "G-F9VYG9D4B6",
+  apiKey: "AIzaSyBXHF2T1dwF260MC73UGCp1bnA0VRnrSbg",
+  authDomain: "aiedoc-test-sp.firebaseapp.com",
+  databaseURL: "https://aiedoc-test-sp.firebaseio.com",
+  projectId: "aiedoc-test-sp",
+  storageBucket: "aiedoc-test-sp.appspot.com",
+  messagingSenderId: "631322958940",
+  appId: "1:631322958940:web:270280599bf775de079a99",
 };
 export default class App extends React.Component {
   state = {

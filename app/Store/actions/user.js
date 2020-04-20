@@ -1,19 +1,20 @@
 import {
   SET_USER,
   UNSET_USER,
-  LOGIN_LOADING,
+  USER_LOADING,
 } from "../../constants/ActionTypes";
-import { validatePin, getUserWithPhone, registerUser, setToken } from "../api";
+import { validatePin, getUserWithPhone, registerUser } from "../api";
 import axios from "axios";
 
 export const login = (info, callbacks) => (dispatch) => {
-  dispatch({ type: LOGIN_LOADING });
+  dispatch({ type: USER_LOADING });
 
   // verify if pin code is correct
   validatePin(info.verificationId, info.verificationCode)
     .then((res) => {
       // Correct pin code !!
       // then check phone number in backend
+      console.log(res.data);
       getUserWithPhone(info.phoneNumber)
         .then((res) => {
           // user already registred
@@ -42,7 +43,7 @@ export const login = (info, callbacks) => (dispatch) => {
 };
 
 export const register = (user) => (dispatch) => {
-  dispatch({ type: LOGIN_LOADING });
+  dispatch({ type: USER_LOADING });
   registerUser(user)
     .then((res) => {
       dispatch({

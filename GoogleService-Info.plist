@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1055588730579-6anqmiasvi2iu4d6nhn05j5b5bufvkm0.apps.googleusercontent.com</string>
+	<string>631322958940-fuju7rrhflg1tlmjibg2egvpam5hgfjm.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1055588730579-6anqmiasvi2iu4d6nhn05j5b5bufvkm0</string>
+	<string>com.googleusercontent.apps.631322958940-fuju7rrhflg1tlmjibg2egvpam5hgfjm</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC65Lp5-M_NZuAWhNQRrrbkv5JrqAo0yCg</string>
+	<string>AIzaSyBOH8mmAT9EvGfJ7EJ04qVNbYZc0sv-0xQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1055588730579</string>
+	<string>631322958940</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.aiedoc.aiedocTest</string>
+	<string>com.aiedoc.aiedocTestSp</string>
 	<key>PROJECT_ID</key>
-	<string>aiedoc-test</string>
+	<string>aiedoc-test-sp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>aiedoc-test.appspot.com</string>
+	<string>aiedoc-test-sp.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1055588730579:ios:e709ea55fcf360836ef626</string>
+	<string>1:631322958940:ios:fa3606109c2ad7d2079a99</string>
 	<key>DATABASE_URL</key>
-	<string>https://aiedoc-test.firebaseio.com</string>
+	<string>https://aiedoc-test-sp.firebaseio.com</string>
 </dict>
 </plist>

@@ -17,18 +17,14 @@ export const Header = (props) => {
           source={require("../../assets/boutique.png")}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => alert("Hi")}>
-        <Image
-          style={styles.tinyLogo}
-          source={require("../../assets/emergency.png")}
-        />
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
+    top: 0,
     height: 100,
     width: "100%",
     paddingHorizontal: 15,
