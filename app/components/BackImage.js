@@ -4,6 +4,7 @@ import { View, ImageBackground, StatusBar, StyleSheet } from "react-native";
 export const BackImage = (props) => {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor="#11A0C1" barStyle={"light-content"} />
       <ImageBackground source={props.source} style={styles.image}>
         {props.children}
       </ImageBackground>
@@ -13,7 +14,7 @@ export const BackImage = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: StatusBar.currentHeight,
+    // marginTop: StatusBar.currentHeight,
     flex: 1,
   },
   image: {

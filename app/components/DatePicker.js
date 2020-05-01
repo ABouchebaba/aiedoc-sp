@@ -23,7 +23,7 @@ const DatePicker = (props) => {
       <TouchableOpacity onPress={showDatePicker} style={props.style}>
         {props.value ? (
           <Text style={styles.hasValue}>
-            {props.title} : {props.value}
+            {props.value}
           </Text>
         ) : (
           <Text style={styles.hasNoValue}>{props.title}</Text>

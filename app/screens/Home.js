@@ -13,8 +13,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 const { height } = Dimensions.get("window");
 
-const powerOnColor = "white";
-const powerOffColor = "#d61f2c";
+const powerOnColor = "red";
+const powerOffColor = "#616161";
 const colors = [powerOffColor, powerOnColor];
 
 const Home = (props) => {
@@ -45,15 +45,23 @@ const Home = (props) => {
       <Header />
       <View style={styles.wrapper}>
         <View>
-          <Text style={styles.label}>Solde</Text>
+          <Text style={styles.label}>Votre solde</Text>
           <Text style={styles.balanceText}>{user.balance} DA</Text>
         </View>
         <TouchableOpacity
           onPress={toggleOnline}
-          style={[styles.power, { backgroundColor: powerColor[0] }]}
+          // style={[styles.power, { backgroundColor: powerColor[0] }]}
+          style={user.state !== "notReady" ? styles.powerOn : styles.powerOff}
         >
-          <Ionicons name="ios-power" size={55} color={powerColor[1]} />
+          <Ionicons
+            name="ios-power"
+            size={55}
+            color={user.state !== "notReady" ? "red" : "#616161"}
+          />
         </TouchableOpacity>
+        <Text style={{ fontSize: 20, color: "white" }}>
+          {user.state !== "notReady" ? "VOUS ETES EN SERVICE" : ""}
+        </Text>
         <Switch
           state={user.state}
           enable={enableEmergency}
@@ -64,7 +72,7 @@ const Home = (props) => {
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   wrapper: {
     height: 0.6 * height,
     maxHeight: 500,
@@ -76,7 +84,7 @@ const styles = {
     fontSize: 18,
   },
   balanceText: {
-    left: -15,
+    // left: -15,
     backgroundColor: "white",
     color: "red",
     maxWidth: 250,
@@ -104,6 +112,42 @@ const styles = {
     borderRadius: 20,
     overflow: "hidden",
   },
-};
+  powerOn: {
+    borderWidth: 2,
+    borderColor: "#C62828",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    shadowColor: "#C62828",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
+  },
+  powerOff: {
+    borderWidth: 2,
+    borderColor: "#BDBDBD",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#9E9E9E",
+    shadowColor: "#BDBDBD",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+  },
+});
 
 export default Home;

@@ -1,17 +1,36 @@
-import React from "react";
-import { ScrollView, StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { FontAwesome, Entypo } from "@expo/vector-icons";
+import { Entypo, FontAwesome } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from "react-native";
+import { InterventionModel } from "./InterventionModel";
+import { useDispatch, useSelector } from "react-redux";
+import { getInterventions } from "../Store/actions";
 
 export const Interventions = (props) => {
-  //const interventions = props.interventions
-  const interventions = [
+  const dispatch = useDispatch();
+  const { interventions, loading } = useSelector((state) => state.history);
+  const { _id } = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    dispatch(getInterventions(_id));
+    // console.log(interventions);
+  }, []);
+
+  // const interventions = props.interventions
+  const fakeInt = [
     {
       _id: "5e655fad2e011c00165eeb06",
       totalPrice: 0,
       intervention_id: "5e655fad2e011c00165eeb05",
       date: "2020-03-08T21:12:13.409Z",
       sp_name: "service provider",
-      rating: 5
+      rating: 5,
     },
     {
       _id: "5e655fad2e011c00165eeb06",
@@ -19,14 +38,35 @@ export const Interventions = (props) => {
       intervention_id: "5e655fad2e011c00165eeb05",
       date: "2020-03-08T21:12:13.409Z",
       sp_name: "service provider",
-      rating: 3
+      rating: 3,
     },
   ];
 
-  return (
+  const [intervention, setIntervention] = useState({
+    open: false,
+    services: [],
+  });
+
+  function close() {
+    setIntervention({ open: false, services: [] });
+  }
+
+  function interventionModel(services) {
+    setIntervention({ open: true, services: services });
+  }
+
+  return loading ? (
+    <View style={styles.scrollContain}>
+      <ActivityIndicator size="large" color="#11A0C1" />
+    </View>
+  ) : (
     <ScrollView style={styles.scrollView}>
-      {interventions.map((inv, i) => (
-        <TouchableOpacity key={i} style={styles.card} onPress={props.model}>
+      {fakeInt.map((inv, i) => (
+        <TouchableOpacity
+          key={i}
+          style={styles.card}
+          onPress={() => interventionModel(inv.services)}
+        >
           <View style={styles.leftSide}>
             <Entypo name="calendar" size={20} color="gray">
               <Text style={styles.text}> {inv.date.slice(0, 10)}</Text>
@@ -39,18 +79,20 @@ export const Interventions = (props) => {
             </FontAwesome>
           </View>
           <View style={styles.rightSide}>
-              <Text style={styles.text}>Rating</Text>
-              <View style={styles.ratingView}>
-                {
-                  [...Array(inv.rating)].map((x,i) =>(
-                    <Entypo key={i} name="star" size={30} color="#FFD700">
-                    </Entypo>
-                  ))
-                }
-              </View>
+            <Text style={styles.text}>Rating</Text>
+            <View style={styles.ratingView}>
+              {[...Array(inv.rating)].map((x, i) => (
+                <Entypo key={i} name="star" size={30} color="#FFD700"></Entypo>
+              ))}
+            </View>
           </View>
         </TouchableOpacity>
       ))}
+      <InterventionModel
+        close={close}
+        showModel={intervention.open}
+        services={intervention.services}
+      />
     </ScrollView>
   );
 };
@@ -64,7 +106,7 @@ const styles = StyleSheet.create({
   },
   card: {
     height: 120,
-    flexDirection:'row',
+    flexDirection: "row",
     backgroundColor: "white",
     marginBottom: 10,
     padding: 15,
@@ -79,22 +121,29 @@ const styles = StyleSheet.create({
 
     elevation: 2,
   },
-  leftSide:{
+  leftSide: {
     justifyContent: "space-around",
-    flex:1,
-    width:'50%',
+    flex: 1,
+    width: "50%",
   },
-  rightSide:{
-    width:'50%',
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center'
+  rightSide: {
+    width: "50%",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  ratingView:{
-    flexDirection:'row'
+  ratingView: {
+    flexDirection: "row",
   },
   text: {
     color: "black",
     fontSize: 18,
+  },
+  scrollContain: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRightWidth: 4,
+    backgroundColor: "#cadce6",
   },
 });

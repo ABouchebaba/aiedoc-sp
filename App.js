@@ -29,8 +29,8 @@ export default class App extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.log("error");
-    console.log(error);
+    console.log("error", error);
+    // console.log(error);
   }
 
   async load() {

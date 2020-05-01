@@ -43,7 +43,7 @@ export const Switch = (props) => {
     >
       <Animated.View style={[styles.switch, { left }]}>
         <View>
-          <Text style={styles.text}>E</Text>
+          <Text style={styles.text}>U</Text>
         </View>
       </Animated.View>
     </TouchableOpacity>

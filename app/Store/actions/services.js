@@ -11,9 +11,12 @@ export const getServices = () => (dispatch) => {
   getServiceTypes()
     .then((res) => {
       console.log("Get services - got results : " + res.data.length);
+      const data  =  []
+      res.data.map(x => x.services.map(y=> data.push(x.type+' -- '+ y.name)))
+      // console.log(data)
       return dispatch({
         type: SET_SERVICES,
-        data: res.data,
+        data: data,
       });
     })
     .catch((err) => {

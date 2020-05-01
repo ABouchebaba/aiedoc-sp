@@ -1,19 +1,12 @@
 import { FontAwesome, Entypo } from "@expo/vector-icons";
 import React from "react";
-import { Image, Modal, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Image, Modal, StyleSheet, Text, View, Animated } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
-export const InterventionModel = (props) => {
-  // const services = props.services
-  const services = [
-    {
-      service: 'injection',
-      prix: 200,
-    },
-    {
-      service: 'massage',
-      prix: 300,
-    }
-  ];
+export const CommandModel = (props) => {
+  // const intervention = props.intervention
+  // console.log(props.products);
+
   return (
     <Modal
       animationType="slide"
@@ -23,21 +16,18 @@ export const InterventionModel = (props) => {
     >
       <View style={styles.modelCard}>
         <View style={styles.modelInfo}>
-          <Text style={styles.modelText}>
-            Liste des services ({services.length})
-          </Text>
+          <Text style={styles.modelText}>Liste des produits ({props.products.length})</Text>
           <ScrollView
             style={styles.list}
             contentContainerStyle={styles.listStyle}
           >
-            <View style={styles.prd}>
-                <Text style={styles.prdTitle}>Service: </Text>
-                <Text style={styles.prdTitle}>Prix: </Text>
-              </View>
-            {services.map((srv, index) => (
+            {props.products.map((prd, index) => (
               <View key={index} style={styles.prd}>
-                <Text style={styles.prdText}>{srv.service}</Text>
-                <Text style={styles.total}>{srv.prix}</Text>
+                <Text style={styles.prdTitle} >Nom: {prd.product_name}</Text>
+                <Text style={styles.prdText} >Option: {prd.option}</Text>
+                <Text style={styles.prdText} >Prix: 100</Text>
+                <Text style={styles.prdText} >Quantité: {prd.qty}</Text>
+                <Text style={styles.total} >TOTAL:{prd.qty*100}</Text>
               </View>
             ))}
             
@@ -101,43 +91,41 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    height: "50%",
+    height:"50%",
     width: "100%",
     paddingVertical: 10,
     // marginTop:10
   },
   listStyle: {
-    paddingVertical: 10,
+    
+    paddingVertical:10,
     backgroundColor: "white",
     // alignItems: "center",
-    borderTopWidth: 1,
-    borderColor: "#707070",
+    borderTopWidth:1,
+    borderColor:'#707070',
     justifyContent: "flex-start",
   },
-  prd: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    justifyContent:'space-around',
-    flexDirection:'row'
+  prd:{
+    paddingHorizontal:10,
+    paddingVertical:10,
+    borderBottomWidth:1
   },
-  prdText: {
-    width:'80%',
+  prdText:{
+    // alignSelf: "center",
     color: "#11A0C1",
     fontSize: 16,
-    textAlign:'left'
   },
-  total: {
+  total:{
     textAlign: "right",
     color: "#11A0C1",
     fontSize: 16,
   },
-  prdTitle: {
+  prdTitle:{
     alignSelf: "center",
     color: "white",
     fontSize: 18,
-    backgroundColor: "#11A0C1",
-    paddingHorizontal: 10,
-    borderRadius: 20,
-  },
+    backgroundColor:'#11A0C1',
+    paddingHorizontal:10,
+    borderRadius:20
+  }
 });

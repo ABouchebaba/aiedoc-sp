@@ -1,11 +1,12 @@
 import { Entypo } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { BackImage, Interventions } from "../components";
+import { BackImage } from "../components";
+import { Commands } from "../components/Commands";
 
 // const initialLayout = { width: Dimensions.get('window').width };
 
-const History = (props) => {
+const CommandsHistory = (props) => {
   return (
     <BackImage source={require("../../assets/bg/bgHome.png")}>
       <View style={styles.header}>
@@ -15,9 +16,9 @@ const History = (props) => {
       </View>
       <View style={styles.mainView}>
         <View style={styles.head}>
-          <Text style={styles.text}>MES PRESTATIONS</Text>
+          <Text style={styles.text}>MES COMMANDES</Text>
         </View>
-        <Interventions />
+        <Commands />
       </View>
     </BackImage>
   );
@@ -90,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default History;
+export default CommandsHistory;

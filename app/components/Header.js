@@ -11,7 +11,7 @@ export const Header = (props) => {
       <TouchableOpacity onPress={navigation.openDrawer}>
         <Entypo name="menu" size={60} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => alert("Hi")}>
+      <TouchableOpacity onPress={() => navigation.navigate('Boutique')}>
         <Image
           style={styles.tinyLogo}
           source={require("../../assets/boutique.png")}
@@ -23,8 +23,6 @@ export const Header = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
-    top: 0,
     height: 100,
     width: "100%",
     paddingHorizontal: 15,

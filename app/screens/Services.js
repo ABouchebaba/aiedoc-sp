@@ -1,39 +1,111 @@
-import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../Store/actions";
-import socketIOClient from "socket.io-client";
-import { BACKEND_URL } from "react-native-dotenv";
+import { Entypo } from "@expo/vector-icons";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import SelectMultiple from "react-native-select-multiple";
+import { useDispatch, useSelector } from "react-redux";
+import { BackImage } from "../components";
+import { getServices} from "../Store/actions";
 
 const Services = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  let services = useSelector((state) => state.services.services);
 
+  const [userService, setUserServices] = useState([]);
+  const fruits = ["Apples", "Oranges", "Pears"];
+
+  function submitServices() {
+    console.log(userService)
+  }
+  
   useEffect(() => {
-    // http://192.168.43.19:4002/
-    const socket = socketIOClient(BACKEND_URL);
-    socket.on("message", (data) => {
-      alert(data);
-    });
+    dispatch(getServices());
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Services screen</Text>
-      <Text>
-        user : {user.name} with email: {user.email}
-      </Text>
-    </View>
+    <BackImage source={require("../../assets/bg/bgHome.png")}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={props.navigation.openDrawer}>
+            <Entypo name="menu" size={60} color="white" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.mainView}>
+          {/* <ScrollView style={styles.scroll}>
+            {services.map((x, i) => (
+              <ServiceCard key={i} type={x}/>
+            ))}
+          </ScrollView> */}
+          <Text style={{ ...styles.text, textAlign: "center" }}>
+            Selectionez vos services
+          </Text>
+          <SelectMultiple
+            style={{ padding: 10 }}
+            labelStyle={styles.text}
+            selectedLabelStyle={{ color: "blue" }}
+            rowStyle={{ backgroundColor: "rgba(255,255,255,0)" }}
+            checkboxStyle={{ borderColor: "#4EC7E6" }}
+            items={services}
+            selectedItems={userService}
+            onSelectionsChange={(value) => setUserServices(value)}
+          />
+
+          <View style={styles.bottom}>
+            {userService.length !== 0 && (
+              <TouchableOpacity
+                onPress={submitServices}
+                style={{
+                  backgroundColor: "#38B4DD",
+                  borderRadius: 50,
+                  padding: 5,
+                }}
+              >
+                <Entypo name="check" color="white" size={40} />
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+      </View>
+    </BackImage>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignSelf: "center",
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: "contain",
+    alignItems: "stretch",
+    justifyContent: "space-evenly",
+    paddingHorizontal: 30,
+  },
+  header: {
+    height: "10%",
+    width: "100%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    backgroundColor: "red",
+  },
+  mainView: {
+    height: "80%",
+    width: "100%",
+    borderRadius: 30,
+    backgroundColor: "#D5F0F8",
+    paddingTop: 10,
+    paddingHorizontal: 15,
+  },
+  text: {
+    color: "#666666",
+    fontSize: 20,
+  },
+  scroll: {
+    paddingHorizontal: 15,
+  },
+  bottom: {
+    height: "15%",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "red",
   },
-};
+});
 
 export default Services;

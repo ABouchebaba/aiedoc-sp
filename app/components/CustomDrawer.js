@@ -33,7 +33,6 @@ export function CustomDrawerContent(props) {
             <Text style={styles.fullName}>
               {firstname.charAt(0).toUpperCase() + "." + lastname}
             </Text>
-            <Text style={styles.consult}>Consultez votre compte</Text>
           </View>
         </View>
         <DrawerItemList

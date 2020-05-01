@@ -5,6 +5,9 @@ import {
 } from "../../constants/ActionTypes";
 import { validatePin, getUserWithPhone, registerUser } from "../api";
 import axios from "axios";
+import { Platform } from "react-native";
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 
 export const login = (info, callbacks) => (dispatch) => {
   dispatch({ type: USER_LOADING });
@@ -57,7 +60,7 @@ export const register = (user) => (dispatch) => {
         type: UNSET_USER,
       });
       alert("Veuillez vérifier votre connexion internet");
-      console.log(err.message);
+      console.log(err);
     });
 };
 
@@ -66,4 +69,31 @@ export const logout = () => (dispatch) => {
   return dispatch({
     type: UNSET_USER,
   });
+};
+
+export const expoHagdak = async () => {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+  if (existingStatus !== "granted") {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+  if (finalStatus !== "granted") {
+    alert("Failed to get push token for push notification!");
+    return;
+  }
+  token = await Notifications.getExpoPushTokenAsync();
+  console.log(token);
+  // return token
+
+  if (Platform.OS === "android") {
+    Notifications.createChannelAndroidAsync("default", {
+      name: "default",
+      sound: true,
+      priority: "max",
+      vibrate: [0, 250, 250, 250],
+    });
+  }
 };

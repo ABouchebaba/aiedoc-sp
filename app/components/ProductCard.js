@@ -1,47 +1,28 @@
+import { Entypo } from "@expo/vector-icons";
 import React from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-} from "react-native";
-import { FontAwesome, Entypo } from "@expo/vector-icons";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export const ProductCard = (props) => {
-  const product = {
-    discount:0,
-    _id: "5e8283076079920016fb9586",
-    name: "Gél hydro",
-    brand: "Venus",
-    category: "Gel",
-    price: 1000,
-    options: [],
-    rating: 3,
-  };
-
+  const product = props.product
   return (
-    <TouchableOpacity style={styles.card} onPress={() => props.navigation.navigate("ProductProfile")}>
+    <TouchableOpacity style={styles.card} activeOpacity={0.6} onPress={() => props.navigation.navigate("ProductProfile", {product})}>
       <View style={styles.imageSide}>
-        <Image source={require("../../assets/logo.png")} style={styles.image} />
+        <Image source={require("../../assets/product.jpg")} style={styles.image} />
       </View>
       <View style={styles.leftSide}>
         <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.brand}>{product.brand}</Text>
-        <Text style={styles.category}>{product.category}</Text>
+        <Text style={styles.brand}>Marque: {product.brand}</Text>
         <View style={styles.ratingView}>
-          {[...Array(product.rating)].map((x, i) => (
-            <Entypo key={i} name="star" size={25} color="#FFD700"></Entypo>
+          {[...Array(5)].map((x, i) => (
+            (product.rating > i )?<Entypo key={i} name="star" size={15} color="#D61F2C"/>:
+            <Entypo key={i} name="star" size={15} color="#E7AAAE" />
           ))}
         </View>
-      </View>
-      <View style={styles.rightSide}>
         {product.discount === 0 ? 
-        <Text style={styles.price}>{product.price} DA</Text>:<>
-        <Text style={styles.priceOld}>{product.price} DA</Text>
-        <Text style={styles.priceDiscount}>{product.price-product.price*(product.discount/100)} DA</Text></>
-      }
+          <Text style={styles.price}>{product.price} DA</Text>:<View style={{flexDirection:'row', justifyContent:'space-around'}}>
+          <Text style={styles.priceOld}>{product.price} DA</Text>
+          <Text style={styles.priceDiscount}>{product.price-product.price*(product.discount/100)} DA</Text></View>
+        }
       </View>
     </TouchableOpacity>
   );
@@ -49,32 +30,30 @@ export const ProductCard = (props) => {
 
 const styles = StyleSheet.create({
   card: {
-    height: 120,
-    flexDirection: "row",
-    // borderWidth: 1,
-    // backgroundColor:'yellow',
-    width: "100%",
-    borderBottomWidth:1,
+    height: 220,
+    backgroundColor:'white',
+    width: "46%",
+    borderWidth:1,
     borderColor:"white",
+    borderRadius:10,
+    marginBottom:10,
+    backgroundColor:'white'
   },
   imageSide: {
-    width: "30%",
+    height: "55%",
     alignItems: "center",
     justifyContent: "center",
   },
   image: {
+    marginTop: 10,
     width: "100%",
-    // height: "auto",
+    height: "100%",
     resizeMode: "contain",
+    borderWidth:1,
   },
   leftSide: {
-    width: "45%",
     paddingHorizontal: 5,
-    //backgroundColor: "blue",
-  },
-  rightSide: {
-    width: "25%",
-    // backgroundColor: "green",
+    backgroundColor:'white'
   },
   ratingView: {
     flexDirection: "row",
@@ -84,16 +63,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   name: {
-    color: "white",
-    fontSize: 18,
+    color: "#11A0C1",
+    fontSize: 16,
   },
   brand: {
-    color: "white",
-    fontSize: 16,
+    color: "#11A0C1",
+    fontSize: 14,
     fontStyle: "italic",
   },
   price: {
-    color: "white",
+    color: "#D61F2C",
     fontSize: 18,
     fontWeight:"bold"
   },
@@ -107,7 +86,7 @@ const styles = StyleSheet.create({
     textDecorationStyle:'dotted'
   },
   priceDiscount:{
-    color: "gold",
+    color: "#D61F2C",
     fontSize: 18,
     fontWeight:"bold",
     fontStyle: "normal",
